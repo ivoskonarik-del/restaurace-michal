@@ -103,6 +103,19 @@
     lb.addEventListener('touchend', (e) => { const d = e.changedTouches[0].clientX - sx; if (Math.abs(d) > 50) show(idx + (d < 0 ? 1 : -1)); });
   }
 
+  /* vyskakovací okno s balíčkem (jednou za návštěvu) */
+  const pop = $('#pop');
+  if (pop) {
+    const key = 'rm_pop_' + (pop.dataset.key || '');
+    let seen = false; try { seen = !!sessionStorage.getItem(key); } catch {}
+    const closePop = () => { pop.classList.remove('open'); try { sessionStorage.setItem(key, '1'); } catch {} };
+    if (!seen) setTimeout(() => { if (!doc.classList.contains('menu-open')) pop.classList.add('open'); }, 1800);
+    $$('.pop__x, .pop__close', pop).forEach((b) => b.addEventListener('click', closePop));
+    pop.addEventListener('click', (e) => { if (e.target === pop) closePop(); });
+    $('a.btn', pop)?.addEventListener('click', () => { try { sessionStorage.setItem(key, '1'); } catch {} });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pop.classList.contains('open')) closePop(); });
+  }
+
   /* galerie: filtr kategorií */
   $$('.gtabs button').forEach((b) => b.addEventListener('click', () => {
     $$('.gtabs button').forEach((x) => x.setAttribute('aria-pressed', x === b));

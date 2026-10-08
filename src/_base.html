@@ -106,6 +106,22 @@
   <a href="{{ B }}{{ url('rezervace', lang) }}">{{ ic('cal') }}{{ U.nav.rezervace }}</a>
 </div>
 
+{% if POP and not (b is defined and b.slug == POP.slug) %}{% from '_macros.html' import img as pimg %}
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-h" data-key="{{ POP.slug }}">
+  <div class="pop__card">
+    <button class="pop__x" type="button" aria-label="{{ U.zavrit }}">{{ ic('x') }}</button>
+    {% if POP.foto and POP.foto.src %}<div class="pop__img">{{ pimg(POP.foto, sizes='(max-width: 767px) 100vw, 400px') }}</div>{% endif %}
+    <div class="pop__body">
+      {% if POP.stitek|t %}<p class="kicker">{{ POP.stitek|t }}</p>{% endif %}
+      <h2 id="pop-h">{{ POP.nazev|t }}</h2>
+      {% if POP.perex|t %}<p>{{ POP.perex|t|nb }}</p>{% endif %}
+      <p class="pop__meta">{% if POP.termin|t %}{{ POP.termin|t }} · {% endif %}<b>{{ (POP.cena|t) or U.cena_na_dotaz }}</b></p>
+      <div class="pop__cta"><a class="btn btn--accent" href="{{ B }}{{ url('balicky', lang, POP.slug) }}">{{ U.popup_btn }} {{ ic('arrow') }}</a><button class="btn btn--ghost pop__close" type="button">{{ U.zavrit }}</button></div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="{{ U.fotogalerie }}">
   <button class="lb-x" type="button" aria-label="{{ U.zavrit }}">{{ ic('x') }}</button>
   <button class="lb-p" type="button" aria-label="←">{{ ic('left') }}</button>

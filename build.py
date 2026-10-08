@@ -157,6 +157,8 @@ for b in BAL:
     if b.get('foto', {}).get('src'):
         fix_img(b['foto'])
 BAL_VIS = [b for b in BAL if not b.get('skryty')]
+_pop = SITE.get('popup') or {}
+POP = next((b for b in BAL_VIS if _pop.get('aktivni') and b['slug'] == _pop.get('balicek')), None)  # vyskakovací okno s balíčkem
 
 tels = [{'cislo': t, 'href': tel_href(t)} for t in SITE.get('telefony', []) if t]
 
@@ -198,7 +200,7 @@ def build():
     env = Environment(loader=FileSystemLoader(ROOT / 'src'), autoescape=select_autoescape(['html']), trim_blocks=True, lstrip_blocks=True)
     env.globals.update(B=B, SITE=SITE, F=F, SB=SB, MENU=MENU, BAL=BAL_VIS, V=V, LANGS=LANGS, LANG_NAME=LANG_NAME,
                        LANG_SHORT=LANG_SHORT, HREFLANG=HREFLANG, NAV=NAV, tels=tels, url=url, year=datetime.date.today().year,
-                       G=G, DOM=DOM)
+                       G=G, DOM=DOM, POP=POP)
     sitemap = []
 
     def render(tpl, page, lang, TT, extra='', **kw):

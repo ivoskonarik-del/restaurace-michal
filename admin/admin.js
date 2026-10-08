@@ -609,12 +609,15 @@ function vFotky() {
 /* ---------------------------------------------------------------- kontakty */
 function vKontakty() {
   const s = S.D.site;
+  if (!s.popup) s.popup = { aktivni: false, balicek: S.D.balicky[0]?.slug || '' };
   view('Kontakty a rezervace', 'Telefony, e-mail a adresa – zobrazují se v hlavičce, patičce, na kontaktu i u rezervace.',
     card('Telefony a e-mail', 'Poslední telefon je na tlačítku „Zavolat“ na mobilu.', fStrList(s.telefony, 'Telefony', { add: 'Přidat telefon' }),
       fText(s, 'email', 'E-mail', { type: 'email' })),
     card('Adresa', null, fText(s, 'ulice', 'Ulice a číslo'), row2(fText(s, 'psc', 'PSČ'), fText(s, 'mesto', 'Město / čtvrť')), fText(s, 'mapy_url', 'Odkaz na mapu', { type: 'url' })),
     card('Rezervační formulář', `Rezervace se ukládají sem do administrace (sekce Rezervace)${S.forms?.to ? ' a upozornění chodí e-mailem na ' + S.forms.to : ''}. Kam chodí upozornění, nastavujeme my – stačí napsat.`,
       fStrList(s.formular.casy, 'Časy na výběr', { add: 'Přidat čas', hint: 'Např. 18:00, 18:30, 19:00 …' }), fText(s.formular, 'max_osob', 'Nejvyšší počet osob v jedné rezervaci', { type: 'number', inputmode: 'numeric' })),
+    card('Vyskakovací okno', 'Po otevření webu se jednou za návštěvu zobrazí okno s vybraným balíčkem (název, krátký popis, termín, cena a tlačítko na jeho stránku). Skrytý balíček se nezobrazí.',
+      fCheck(s.popup, 'aktivni', 'Zobrazovat vyskakovací okno'), fSelect(s.popup, 'balicek', 'Balíček v okně', S.D.balicky.map((b) => [b.slug, b.nazev?.cs || b.slug]))),
     card('Sociální sítě', null, fText(s.socialni, 'facebook', 'Facebook', { type: 'url' }), fText(s.socialni, 'instagram', 'Instagram', { type: 'url' }), fText(s.socialni, 'tripadvisor', 'TripAdvisor', { type: 'url' }), fText(s.socialni, 'flickr', 'Flickr', { type: 'url' })),
     card('Partneři', 'Loga v pruhu „Naši partneři“ na úvodní stránce.', fList(s.partneri, { title: (p) => p.nazev, sub: (p) => p.url, thumb: (p) => p.logo, addLabel: 'Přidat partnera', make: () => ({ nazev: '', url: '', logo: '' }),
       body: (p, el, r) => el.append(row2(fText(p, 'nazev', 'Název', { on: r }), fText(p, 'url', 'Odkaz', { type: 'url', on: r })), fImage(p, 'logo', 'Logo', p.nazev || 'partner', { on: r })) })),
