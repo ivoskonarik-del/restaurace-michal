@@ -1,7 +1,7 @@
 {
   "nazev": "Restaurant Michal",
   "domena": "https://www.restaurant-michal.cz",
-  "indexovat": false,
+  "indexovat": true,
   "ulice": "Náprstkova 273/8",
   "psc": "110 00",
   "mesto": "Praha 1 – Staré Město",
