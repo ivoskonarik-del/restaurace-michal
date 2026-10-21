@@ -7,7 +7,9 @@
   <div class="container resv">
     <div class="resv__card formbox rv">
       <h2 style="font-size:clamp(1.7rem,3vw,2.4rem);margin-bottom:.6rem">{{ P.form_h }}</h2>
-      <p class="muted" style="margin-bottom:2rem">{{ P.form_text|nb }}</p>
+      <p class="muted" style="margin-bottom:.8rem">{{ P.form_text|nb }}</p>
+      {% set DNES = {'cs':'Rezervaci na dnešní den přijímáme do 17:00.','en':'Reservations for the same day are accepted until 5:00 pm.','de':'Reservierungen für den heutigen Tag nehmen wir bis 17:00 Uhr an.','fr':'Les réservations pour le jour même sont acceptées jusqu’à 17h00.','it':'Le prenotazioni per il giorno stesso sono accettate fino alle 17:00.','es':'Las reservas para el mismo día se aceptan hasta las 17:00.','zh':'当天预订请于17:00前提交。'} %}
+      <p class="resv__dnes" style="margin-bottom:2rem;font-weight:600">{{ DNES[lang] or DNES.cs }}</p>
       <form class="form" data-form="rezervace" novalidate>
         <div class="f f--3"><label for="rj">{{ U.f.jmeno }} <i>*</i></label><input id="rj" name="jmeno" autocomplete="given-name" required></div>
         <div class="f f--3"><label for="rp">{{ U.f.prijmeni }} <i>*</i></label><input id="rp" name="prijmeni" autocomplete="family-name" required></div>

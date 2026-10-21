@@ -650,7 +650,7 @@ html:lang(zh-Hans) .mset__head small { font-style: normal; }
   .hdr.is-solid .logo img { height: 34px; }
   .logo__txt small { display: none; }
   .logo__txt b { font-size: 1.12rem; }
-  .hdr__act .btn--resv { min-height: 40px; padding: .5rem .95rem; font-size: .8rem; }
+  .hdr__act .btn--resv { display: none; }
   .hdr__act { gap: .45rem; }
   .lang > button { height: 40px; padding: 0 .65rem; gap: .25rem; font-size: .78rem; }
   .lang > button > svg:last-child { display: none; }
