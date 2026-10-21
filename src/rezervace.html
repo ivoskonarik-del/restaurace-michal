@@ -21,6 +21,7 @@
         <div class="f"><label for="rz">{{ U.f.poznamka }}</label><textarea id="rz" name="poznamka" rows="3" placeholder="{{ U.f.poznamka_ph }}"></textarea></div>
         <label class="f consent"><input type="checkbox" name="souhlas" required><span>{{ U.f.souhlas }} <a href="{{ B }}{{ url('gdpr', lang) }}" target="_blank">{{ U.f.souhlas_odkaz }}</a>.</span></label>
         <input class="hp" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="f form__dnes"><strong>{{ U.f.dnes }}</strong></p>
         <p class="form__msg" role="status"></p>
         <button class="btn btn--accent" type="submit">{{ P.odeslat }} {{ ic('arrow') }}</button>
       </form>

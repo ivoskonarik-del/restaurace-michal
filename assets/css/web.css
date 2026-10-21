@@ -737,3 +737,7 @@ html:lang(zh-Hans) .mset__head small { font-style: normal; }
   .pop__body p:not(.kicker):not(.pop__meta) { margin-bottom: 1.2rem; }
 }
 @media (prefers-reduced-motion: reduce) { .pop, .pop__box { transition: none; } }
+
+/* úprava 21. 10. 2026: na mobilu je rezervace v liště níž (useknuté tlačítko v hlavičce) */
+@media (max-width: 767px) { .hdr__act .btn--resv { display: none; } }
+.form__dnes { font-size: .95rem; margin: 0; }
